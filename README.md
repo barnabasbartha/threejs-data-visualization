@@ -1,1 +1,1 @@
-# threejs-data-visualization
+# Three.js Data Visualization PoC
