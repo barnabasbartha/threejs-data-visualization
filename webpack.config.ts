@@ -8,6 +8,7 @@ import {Configuration, HotModuleReplacementPlugin} from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 // @ts-ignore
 import ReplaceInFileWebpackPlugin from 'replace-in-file-webpack-plugin';
+// @ts-ignore
 import TerserPlugin from 'terser-webpack-plugin';
 // @ts-ignore
 import ThreadsPlugin from 'threads-plugin';
@@ -18,7 +19,7 @@ interface Target {
    readonly output: string;
    readonly target: 'web' | 'node';
    readonly title?: string;
-   readonly assetDir?: string;
+   readonly assetDir: string;
    readonly distAssetDir?: string;
    readonly baseUrl?: string;
 }
