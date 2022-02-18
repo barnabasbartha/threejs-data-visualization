@@ -1,5 +1,19 @@
 import {EventStatus} from '../event.model';
 
+export enum ControllerEventType {
+   Key,
+   MouseMove,
+   WindowResize,
+}
+
+export type DynamicControllerEvent = ControllerEvent<unknown>;
+
+export interface ControllerEvent<T> {
+   type: ControllerEventType;
+   status?: EventStatus;
+   value: T;
+}
+
 export interface KeyEvent {
    status: EventStatus;
    key: string;

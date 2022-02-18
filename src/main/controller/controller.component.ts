@@ -2,7 +2,7 @@ import {Singleton} from 'typescript-ioc';
 import {KeyEvent} from '../../common/controller/controller.model';
 import {EventStatus, Vector2} from '../../common/event.model';
 import {fromEvent, merge, Observable, Subject} from 'rxjs';
-import {distinctUntilChanged, map, tap} from 'rxjs/operators';
+import {distinctUntilChanged, map, shareReplay, startWith, tap} from 'rxjs/operators';
 
 @Singleton
 export class ControllerComponent {
@@ -19,11 +19,13 @@ export class ControllerComponent {
 
    constructor() {
       this.resize$ = fromEvent(window, 'resize').pipe(
+         startWith(1),
          tap(() => {
             this.resizeObject.x = window.innerWidth;
             this.resizeObject.y = window.innerHeight;
          }),
          map(() => this.resizeObject),
+         shareReplay(1),
       );
 
       this.key$ = merge(
@@ -58,7 +60,7 @@ export class ControllerComponent {
       );
    }
 
-   init(canvas: HTMLElement, guiLayer: HTMLDivElement) {
+   init(canvas: HTMLElement, guiLayer?: HTMLDivElement) {
       (fromEvent(canvas, 'mousemove') as Observable<MouseEvent>)
          .pipe(
             tap((event) => {
@@ -82,6 +84,8 @@ export class ControllerComponent {
          )
          .subscribe((status) => this.pointerLockSubject.next(status));
 
-      fromEvent(guiLayer, 'mousedown').subscribe(() => canvas.requestPointerLock());
+      if (guiLayer) {
+         fromEvent(guiLayer, 'mousedown').subscribe(() => canvas.requestPointerLock());
+      }
    }
 }

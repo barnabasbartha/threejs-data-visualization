@@ -3,6 +3,7 @@ import {CoreThreadManager} from "../core/core-thread.manager";
 import {Worker} from "threads";
 import {initThread} from "./main-thread.component.utils";
 import {Subject} from "rxjs";
+import {DynamicControllerEvent} from "../common/controller/controller.model";
 
 @Singleton
 export class MainThreadComponent {
@@ -22,5 +23,9 @@ export class MainThreadComponent {
             coreWorker.postMessage({canvas: offscreenCanvas}, [offscreenCanvas]);
             this.coreThreadLoadedSubject.next();
          });
+   }
+
+   sendEvent(event: DynamicControllerEvent) {
+      this.coreThread?.sendEvent(event);
    }
 }
