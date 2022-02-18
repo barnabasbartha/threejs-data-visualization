@@ -11,7 +11,7 @@ export class RendererComponent {
    private renderer?: WebGLRenderer;
    private gl?: WebGLRenderingContext;
 
-   init(canvas: HTMLCanvasElement): void {
+   init(canvas: HTMLCanvasElement) {
       // @ts-ignore
       canvas['style'] = {width: canvas.width, height: canvas.height};
       this.renderer = new WebGLRenderer({
@@ -32,11 +32,11 @@ export class RendererComponent {
       this.initSubject.next();
    }
 
-   setSize(width: number, height: number): void {
+   setSize(width: number, height: number) {
       this.renderer?.setSize(width, height);
    }
 
-   render(scene: Object3D, camera: Camera): void {
+   render(scene: Object3D, camera: Camera) {
       this.renderer?.render(scene, camera);
    }
 }

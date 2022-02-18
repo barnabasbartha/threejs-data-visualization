@@ -16,15 +16,15 @@ export class TimerComponent {
       this.step();
    }
 
-   enable(): void {
+   enable() {
       this.enabled = true;
    }
 
-   disable(): void {
+   disable()  {
       this.enabled = false;
    }
 
-   private step(): void {
+   private step() {
       const delta = this.clock.getDelta() ?? this.frame;
       if (this.enabled) {
          const deltaRatio = (delta * 1000) / this.frame;

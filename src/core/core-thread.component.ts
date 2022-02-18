@@ -6,7 +6,7 @@ export class CoreThreadComponent {
    private readonly canvasLoadedSubject = new Subject<HTMLCanvasElement>();
    readonly canvasLoaded$ = this.canvasLoadedSubject.asObservable();
 
-   waitForCanvas(): void {
+   waitForCanvas() {
       onmessage = (event) => {
          const canvas = event?.data?.canvas as HTMLCanvasElement | null;
          if (canvas) {

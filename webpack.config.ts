@@ -25,7 +25,7 @@ interface Target {
 }
 
 const target: Target = {
-   entry: 'src/main/main.ts',
+   entry: 'src/main/main-thread.manager.ts',
    distDir: 'dist',
    output: 'main.js',
    target: 'web',
