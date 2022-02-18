@@ -1,4 +1,4 @@
-import {Camera, Object3D, Scene, sRGBEncoding, WebGLRenderer,} from 'three';
+import {Camera, Object3D, sRGBEncoding, WebGLRenderer,} from 'three';
 import {Subject} from 'rxjs';
 import {Config} from '../../config/config';
 import {Singleton} from 'typescript-ioc';
@@ -9,7 +9,6 @@ export class RendererComponent {
    readonly init$ = this.initSubject.pipe();
 
    private renderer?: WebGLRenderer;
-   private tmpScene = new Scene();
    private gl?: WebGLRenderingContext;
 
    init(canvas: HTMLCanvasElement): void {

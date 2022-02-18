@@ -2,6 +2,7 @@ import {Inject, Singleton} from 'typescript-ioc';
 import {RendererComponent} from './renderer.component';
 import {TimerComponent} from '../timer/timer.component';
 import {BoxGeometry, Mesh, MeshNormalMaterial, PerspectiveCamera, Scene} from "three";
+import {CoreThreadComponent} from "../core-thread.component";
 
 @Singleton
 export class RendererManager {
@@ -11,8 +12,13 @@ export class RendererManager {
 
    constructor(
       @Inject private readonly component: RendererComponent,
+      @Inject private readonly coreThread: CoreThreadComponent,
       @Inject private readonly timer: TimerComponent,
    ) {
+      coreThread.canvasLoaded$.subscribe((canvas) => component.init(canvas));
+      timer.step$.subscribe(() => component.render(this.scene, this.camera));
+
+      // Tmp scene
       this.camera.position.z = 1;
 
       const geometry = new BoxGeometry(0.2, 0.2, 0.2);
@@ -24,6 +30,5 @@ export class RendererManager {
          mesh.rotateX(0.01 * delta);
          mesh.rotateY(0.01 * delta);
       });
-      timer.step$.subscribe(() => component.render(this.scene, this.camera));
    }
 }

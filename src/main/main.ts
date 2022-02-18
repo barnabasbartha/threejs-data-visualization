@@ -1,5 +1,5 @@
 import {spawn, Worker} from 'threads/dist';
-import {CoreThread} from '../core/core-thread';
+import {CoreThreadManager} from '../core/core-thread.manager';
 import './main.scss';
 import {Container, Singleton} from 'typescript-ioc';
 import {WorkerImplementation} from 'threads/dist/types/master';
@@ -7,7 +7,7 @@ import {WorkerImplementation} from 'threads/dist/types/master';
 @Singleton
 class Main {
    private canvas: HTMLCanvasElement;
-   private coreThread?: CoreThread;
+   private coreThread?: CoreThreadManager;
 
    constructor() {
       this.initCanvas();
@@ -31,7 +31,7 @@ class Main {
       const offscreenCanvas = this.canvas.transferControlToOffscreen();
       offscreenCanvas.width = this.canvas.clientWidth;
       offscreenCanvas.height = this.canvas.clientHeight;
-      this.initThread<CoreThread>(new Worker('../core/core-thread'))
+      this.initThread<CoreThreadManager>(new Worker('../core/core-thread.manager'))
          .then(([coreThread, coreWorker]) => {
             this.coreThread = coreThread;
             console.log('Core thread created');
