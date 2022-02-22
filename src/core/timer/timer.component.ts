@@ -20,7 +20,7 @@ export class TimerComponent {
       this.enabled = true;
    }
 
-   disable()  {
+   disable() {
       this.enabled = false;
    }
 

@@ -6,6 +6,7 @@ import {CoreThreadComponent} from "./core-thread.component";
 import {DynamicControllerEvent} from "../common/controller/controller.model";
 import {CoreControllerComponent} from "./controller/core-controller.component";
 import {CameraManager} from "./camera/camera.manager";
+import {SceneManager} from "./scene/scene.manager";
 
 @Singleton
 export class CoreThreadManager {
@@ -15,6 +16,7 @@ export class CoreThreadManager {
       @Inject private readonly timer: TimerManager,
       @Inject private readonly controller: CoreControllerComponent,
       @Inject private readonly camera: CameraManager,
+      @Inject private readonly scene: SceneManager,
    ) {
       component.waitForCanvas();
       component.canvasLoaded$.subscribe(() => console.log('Canvas loaded in Core thread.'))
