@@ -9,10 +9,12 @@ export class SceneManager {
       @Inject private readonly timer: TimerComponent,
    ) {
       // TODO: Separate Scenes
-      component.createDefaultScene();
-      timer.step$.subscribe((delta) => {
-         component.getScene().rotateX(0.01 * delta);
-         component.getScene().rotateY(0.01 * delta);
-      });
+      // component.createDefaultScene();
+      // timer.step$.subscribe((delta) => {
+      //    component.getScene().rotateX(0.01 * delta);
+      //    component.getScene().rotateY(0.01 * delta);
+      // });
+      component.createInstancedDemoScene();
+      timer.step$.subscribe((delta) => component.update(delta));
    }
 }

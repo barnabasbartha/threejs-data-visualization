@@ -9,6 +9,9 @@ export class CameraComponent {
    constructor() {
       this.camera = new PerspectiveCamera(70, 1, 0.01, 10);
       this.camera.position.z = 1;
+      this.camera.position.y = .2;
+      this.camera.position.x = .2;
+      this.camera.lookAt(0, 0, 0);
    }
 
    getCamera(): Camera {
